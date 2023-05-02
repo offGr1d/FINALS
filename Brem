@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class BirthdayReminderInocentes {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        String[] names = new String[10];
+        int[] birthdates = new int[10];
+        int count = 0;
+        
+        System.out.println("Enter up to 10 names and birthdates. Enter 'done' to finish.");
+        
+        while(count < 10) {
+            System.out.print("Name: ");
+            String name = input.nextLine();
+            if(name.equalsIgnoreCase("done")) break;
+            names[count] = name;
+            System.out.print("Birthdate (MMDDYYYY): ");
+            int birthdate = input.nextInt();
+            input.nextLine();
+            birthdates[count] = birthdate;
+            count++;
+        }
+        
+        System.out.println("You entered " + count + " names.");
+        System.out.println(Arrays.toString(names));
+        
+        while(true) {
+            System.out.print("Enter a name to look up the birthdate (or 'done' to exit): ");
+            String name = input.nextLine();
+            if(name.equalsIgnoreCase("done")) break;
+            int index = -1;
+            for(int i = 0; i < count; i++) {
+                if(names[i].equalsIgnoreCase(name)) {
+                    index = i;
+                    break;
+                }
+            }
+            if(index == -1) {
+                System.out.println("Name not found.");
+            } else {
+                System.out.println(names[index] + " was born on " + birthdates[index]);
+            }
+        }
+    }
+}
