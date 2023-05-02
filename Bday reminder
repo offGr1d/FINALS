@@ -4,29 +4,30 @@ public class BirthdayReminderInocentes {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String[] names = new String[10];
-        int[] birthdates = new int[10];
+        int[] birthMonths = new int[10];
         int count = 0;
         
-        System.out.println("Enter 10 names and birthdates.");
+        System.out.println("Enter 10 names and birth months (1-12). Enter 'done' to finish.");
         
         while(count < 10) {
-            System.out.print("Name " + (count + 1) + ": ");
+            System.out.print("Name: ");
             String name = input.nextLine();
+            if(name.equalsIgnoreCase("done")) break;
             names[count] = name;
-            System.out.print("Birthdate " + (count + 1) + " (MMDDYYYY): ");
-            int birthdate = input.nextInt();
+            System.out.print("Birth month (1-12): ");
+            int birthMonth = input.nextInt();
             input.nextLine();
-            birthdates[count] = birthdate;
+            birthMonths[count] = birthMonth;
             count++;
         }
         
         System.out.println("You entered " + count + " names.");
-        System.out.println(Arrays.toString(names));
+        System.out.println(Arrays.toString(Arrays.copyOf(names, count)));
         
         while(true) {
-            System.out.print("Enter a name to look up the birthdate (or 'exit' to quit): ");
+            System.out.print("Enter a name to look up the birth month (or 'done' to exit): ");
             String name = input.nextLine();
-            if(name.equalsIgnoreCase("exit")) break;
+            if(name.equalsIgnoreCase("done")) break;
             int index = -1;
             for(int i = 0; i < count; i++) {
                 if(names[i].equalsIgnoreCase(name)) {
@@ -37,7 +38,7 @@ public class BirthdayReminderInocentes {
             if(index == -1) {
                 System.out.println("Name not found.");
             } else {
-                System.out.println(names[index] + " was born on " + birthdates[index]);
+                System.out.println(names[index] + " was born in month " + birthMonths[index]);
             }
         }
     }
